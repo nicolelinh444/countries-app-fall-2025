@@ -11,7 +11,7 @@ function App() {
       <nav>
         <ul>
           <li className="home">
-            <Link to="/Home">Where in the World?</Link>
+            <Link to="/">Where in the World?</Link>
           </li>
           <li className="saved">
             <Link to="/SavedCountries">Saved Countries</Link>
