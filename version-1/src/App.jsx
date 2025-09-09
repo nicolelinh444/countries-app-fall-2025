@@ -1,10 +1,9 @@
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home.jsx';
-import CountryDetails from './pages/CountryDetails.jsx';
+import CountryDetail from './pages/CountryDetail.jsx';
 import SavedCountries from './pages/SavedCountries.jsx';
 import { useEffect, useState } from 'react';
-import localData from './localData.js';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -41,7 +40,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home countriesData={countries}/>} />
         <Route path="/SavedCountries" element={<SavedCountries />} />
-        <Route path="/CountryDetails" element={<CountryDetails />} />
+        <Route path="/country-detail/:countryName" element={<CountryDetail />} />
       </Routes>
     </div>
   );
