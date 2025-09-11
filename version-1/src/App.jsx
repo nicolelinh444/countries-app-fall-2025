@@ -1,32 +1,39 @@
-import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home.jsx';
-import CountryDetail from './pages/CountryDetail.jsx';
-import SavedCountries from './pages/SavedCountries.jsx';
-import { useEffect, useState } from 'react';
+import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import CountryDetail from "./pages/CountryDetail.jsx";
+import SavedCountries from "./pages/SavedCountries.jsx";
+import { useEffect, useState } from "react";
 
 function App() {
+  // useState variable to store all countries that are fetched from the API
   const [countries, setCountries] = useState([]);
 
+  // API call
   const getCountriesInfo = async () => {
     try {
+      // url with parameters
       const response = await fetch(
         `https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders`
       );
+      // assigns the data from the API call to a variable
       const data = await response.json();
-      console.log(data);
+      // save the data in useState variable
       setCountries(data);
     } catch (error) {
-      console.log('Error:' + error.message);
+      // error message will run in the console if the API call is not successful
+      console.log("Error:" + error.message);
     }
   };
 
-  useEffect(() =>{
+  // call the getCountriesInfo function when the App component loads
+  useEffect(() => {
     getCountriesInfo();
   }, []);
 
   return (
     <div>
+      {/* navbar with links */}
       <nav>
         <ul>
           <li className="home">
@@ -37,13 +44,24 @@ function App() {
           </li>
         </ul>
       </nav>
+      {/* app routes */}
       <Routes>
+        {/* home page, passes down countries as a prop */}
         <Route path="/" element={<Home countriesData={countries} />} />
-        <Route path="/SavedCountries" element={<SavedCountries countriesData={countries} />} />
-        <Route path="/country-detail/:countryName" element={<CountryDetail countriesData={countries} />} />
-      </ Routes>
+        {/* saved countries, passes down countries as a prop */}
+        <Route
+          path="/SavedCountries"
+          element={<SavedCountries countriesData={countries} />}
+        />
+        {/* country detail page, creates dynamic url for country name */}
+        <Route
+          path="/country-detail/:countryName"
+          element={<CountryDetail countriesData={countries} />}
+        />
+      </Routes>
     </div>
   );
 }
 
+// export app so that it can be used in main.jsx
 export default App;
