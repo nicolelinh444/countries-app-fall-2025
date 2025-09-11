@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import CountryDetail from "./pages/CountryDetail.jsx";
 import SavedCountries from "./pages/SavedCountries.jsx";
+import localData from "./localData.js";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -13,16 +14,19 @@ function App() {
   const getCountriesInfo = async () => {
     try {
       // url with parameters
-      const response = await fetch(
-        `https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders`
-      );
+      const response = await fetch();
+      `https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders`;
       // assigns the data from the API call to a variable
       const data = await response.json();
-      // save the data in useState variable
-      setCountries(data);
+      // if data from api call exists: use data, if not use localData
+      setCountries(data ? data : localData);
     } catch (error) {
       // error message will run in the console if the API call is not successful
-      console.log("Error:" + error.message);
+      console.log(
+        "API failed, using localData as backup. Error:" + error.message
+      );
+      // calls setCountries with localData passed in
+      setCountries(localData);
     }
   };
 
