@@ -61,7 +61,8 @@ a {
     object-fit: cover;
 }
 
-.countries-card h2, .countries-card p {
+.countries-card h2, 
+.countries-card p {
     padding-left: 1rem;
 }
 
