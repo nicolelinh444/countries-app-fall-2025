@@ -1,5 +1,5 @@
 // pages/SavedCountries.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // a form where users can save profile info
 function SavedCountries() {
@@ -11,6 +11,14 @@ function SavedCountries() {
     bio: "",
   });
 
+  // loads saved data on initial page load
+  useEffect(() => {
+    const savedData = localStorage.getItem("formData");
+    if (savedData) {
+      setFormData(JSON.parse(savedData));
+    }
+  }, []);
+
   // update formData variable when user input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,6 +29,13 @@ function SavedCountries() {
   function handleSubmit(event) {
     // prevents page from reloading
     event.preventDefault();
+
+    // changes form data from a string to a data object and saves it when the user submits form
+    let formData_stringified = JSON.stringify(formData);
+    localStorage.setItem("formData", formData_stringified);
+    let formData_destringified = JSON.parse(localStorage.getItem("formData"));
+    console.log("User Data:", formData_destringified);
+
     // resets form data after submission
     setFormData({
       name: "",
@@ -33,6 +48,7 @@ function SavedCountries() {
   return (
     <div className="saved-countries-page">
       <h2>My Saved Countries</h2>
+      <h2>Welcome, {formData.name}!</h2>
       <div className="form-container">
         <h2>My Profile</h2>
         <br />
