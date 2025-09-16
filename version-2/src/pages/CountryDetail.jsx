@@ -1,5 +1,6 @@
 // pages/CountryDetail.jsx
 import { useParams, Link } from "react-router-dom";
+import PopulationWithCommas from "../components/PopulationWithCommas";
 
 function CountryDetail({ countriesData }) {
   // get the dynamic country name from the url
@@ -38,7 +39,7 @@ function CountryDetail({ countriesData }) {
             <p>
               {/* country population */}
               <strong>Population: </strong>
-              {currentCountry.population}
+              <PopulationWithCommas value={currentCountry.population} />
             </p>
             <p>
               {/* country region */}

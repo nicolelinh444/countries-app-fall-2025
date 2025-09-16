@@ -15,14 +15,15 @@ function SavedCountries() {
   useEffect(() => {
     const savedData = localStorage.getItem("formData");
     if (savedData) {
-      setFormData(JSON.parse(savedData));
+      let destring = JSON.parse(savedData);
+      setFormData(destring);
     }
   }, []);
 
   // update formData variable when user input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
   // handle form submission
@@ -30,11 +31,9 @@ function SavedCountries() {
     // prevents page from reloading
     event.preventDefault();
 
-    // changes form data from a string to a data object and saves it when the user submits form
+    // turns form data into a string and saves it in local storage
     let formData_stringified = JSON.stringify(formData);
     localStorage.setItem("formData", formData_stringified);
-    let formData_destringified = JSON.parse(localStorage.getItem("formData"));
-    console.log("User Data:", formData_destringified);
 
     // resets form data after submission
     setFormData({
@@ -48,7 +47,7 @@ function SavedCountries() {
   return (
     <div className="saved-countries-page">
       <h2>My Saved Countries</h2>
-      <h2>Welcome, {formData.name}!</h2>
+      {formData && <h2>Welcome, {formData.name}!</h2>}
       <div className="form-container">
         <h2>My Profile</h2>
         <br />

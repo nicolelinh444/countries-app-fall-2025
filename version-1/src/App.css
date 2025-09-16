@@ -88,6 +88,10 @@ a {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.form-container textarea {
+    padding-top: 14rem;
+}
+
 .form-container button {
     background-color: var(--purple);
     border-radius: 5px;
