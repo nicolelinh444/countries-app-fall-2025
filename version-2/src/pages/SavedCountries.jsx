@@ -3,22 +3,10 @@ import { useState, useEffect } from "react";
 
 // a form where users can save profile info
 function SavedCountries() {
+  const emptyFormState = { fullName: "", email: "", country: "", bio: "" };
   // stores form inputs
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    country: "",
-    bio: "",
-  });
-
-  // loads saved data on initial page load
-  useEffect(() => {
-    const savedData = localStorage.getItem("formData");
-    if (savedData) {
-      let destring = JSON.parse(savedData);
-      setFormData(destring);
-    }
-  }, []);
+  const [formData, setFormData] = useState(emptyFormState);
+  const [userInfo, setUserInfo] = useState(null);
 
   // update formData variable when user input changes
   const handleChange = (event) => {
@@ -30,24 +18,28 @@ function SavedCountries() {
   function handleSubmit(event) {
     // prevents page from reloading
     event.preventDefault();
+    console.log(formData, "form was submitted");
 
     // turns form data into a string and saves it in local storage
     let formData_stringified = JSON.stringify(formData);
-    localStorage.setItem("formData", formData_stringified);
+    localStorage.setItem("profile", formData_stringified);
 
-    // resets form data after submission
-    setFormData({
-      name: "",
-      email: "",
-      country: "",
-      bio: "",
-    });
+    setUserInfo(formData);
+    setFormData(emptyFormState);
   }
+
+  // loads saved data on initial page load
+  useEffect(() => {
+    if (localStorage.getItem("profile")) {
+      let profileDeStringified = JSON.parse(localStorage.getItem("profile"));
+      setUserInfo(profileDeStringified);
+    }
+  }, []);
 
   return (
     <div className="saved-countries-page">
       <h2>My Saved Countries</h2>
-      {formData && <h2>Welcome, {formData.name}!</h2>}
+      {userInfo ? <h2>Welcome, {userInfo.name}!</h2> : <h2></h2>}
       <div className="form-container">
         <h2>My Profile</h2>
         <br />
@@ -88,8 +80,8 @@ function SavedCountries() {
           <br />
           {/* bio input */}
           <textarea
-            rows="15"
-            cols="60"
+            rows="10"
+            cols="45"
             placeholder="Bio"
             type="text"
             name="bio"

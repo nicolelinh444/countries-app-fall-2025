@@ -7,10 +7,6 @@ import localData from "./localData.js";
 import { useEffect, useState } from "react";
 
 function App() {
-  // format numbers with commas (US)
-  function PopulationWithCommas({ value }) {
-    return <>{value.toLocaleString("en-US")}</>;
-  }
   // useState variable to store all countries that are fetched from the API
   const [countries, setCountries] = useState([]);
 
