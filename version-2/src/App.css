@@ -16,7 +16,7 @@ body {
 
 nav {
     background-color: var(--white);
-    padding: 1rem;
+    padding: 2rem;
 }
 
 nav ul {
@@ -32,11 +32,11 @@ a {
 
 .home a {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 32px;
 }
 
 .saved {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .countries-list {
@@ -48,7 +48,7 @@ a {
 
 .countries-card {
     background-color: var(--white);
-    box-shadow: 0px 0px 5px var(--dark-gray);
+    box-shadow: 0px 0px 3px var(--dark-gray);
     border-radius: 10px;
     margin: 1rem;
     padding-bottom: .5rem;
