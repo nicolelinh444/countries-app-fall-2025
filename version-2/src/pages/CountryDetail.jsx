@@ -16,6 +16,26 @@ function CountryDetail({ countriesData }) {
     return <h2>Country not found</h2>;
   }
 
+  // click handler for save button
+  function saveOnClick() {
+    // declares a variable for saved countries
+    let savedCountries =
+      // get saved countries from local storage or an empty array if no countries are saved
+      JSON.parse(localStorage.getItem("savedCountries")) || [];
+    // checks if country has already been saved
+    const found = savedCountries.find(
+      (country) => country.name.common === currentCountry.name.common
+    );
+
+    // if country has not been saved yet
+    if (!found) {
+      // push current country to saved countries array
+      savedCountries.push(currentCountry);
+      // save to local storage
+      localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
+    }
+  }
+
   return (
     <>
       <div className="country-detail-card">
@@ -33,7 +53,7 @@ function CountryDetail({ countriesData }) {
             {/* country name */}
             <h1>{currentCountry.name.common}</h1>
             {/* save button */}
-            <Link to="/" className="button-style">
+            <Link onClick={saveOnClick} className="button-style">
               Save{" "}
             </Link>
             <p>

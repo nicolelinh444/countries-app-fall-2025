@@ -51,24 +51,24 @@ Step 2: Render the state variable in the JSX as a heading that welcomes the user
 📊 SAVED COUNTRIES DATA
 ------------------------
 WHAT data should we store & retrieve?
-KEY: "countryData"
-VALUE: name, flag image url, population, region, capital
-VALUE DATA TYPE: data object
-EXAMPLE VALUE: countryData {
-    name: "USA",
-    capital: "Washington DC",
-    region: "Americas",
-    population: 329484123
-};
+KEY: "savedCountries"
+VALUE: saved countries names
+VALUE DATA TYPE: array of strings
+EXAMPLE VALUE: savedCountries [
+   "Germany",
+   "China",
+   "USA"
+]
 ------------------------
 🔶 STORING SAVED COUNTRIES DATA
 ------------------------
-WHEN: _______
-WHERE: _______
-HOW:
-Step 1: _______
-Step 2: _______
-Step 3: _______
+WHEN: user clicks save button on a country
+WHERE: save button on country detail page, renders on saved countries page
+HOW: make the save button add name of user's preferred country in local storage, check if country has been saved before, retrieve preferred country data from local storage 
+Step 1: We need to attach an onClick handler to the Save button on the CountryDetail page
+Step 2: When the user clicks on the Save button, call the handleClick function
+Step 3: The handleClick function needs to save the country's name in localStorage
+Step 4: The handleClick function will first get the array of saved countries from local Storage. If the country is already saved, then there is no need to save the country. If the country is not saved yet, then add the country's name to the array of savedCountries and store that value in localStorage.
 Add more steps as needed!
 ------------------------
 🔶 RETRIEVING SAVED COUNTRIES DATA
