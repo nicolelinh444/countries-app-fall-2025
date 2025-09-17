@@ -3,9 +3,8 @@ import SavedCountriesForm from "../components/Form";
 
 function SavedCountries() {
   // get list of saved countries from local storage
-  let savedCountriesDestring = JSON.parse(
-    localStorage.getItem("savedCountries")
-  );
+  let savedCountriesDestring =
+    JSON.parse(localStorage.getItem("savedCountries")) || [];
 
   return (
     <div className="saved-countries-page">
