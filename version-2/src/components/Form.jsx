@@ -35,66 +35,63 @@ function SavedCountriesForm() {
   }, []);
 
   return (
-    <div className="saved-countries-page">
-      <h2>My Saved Countries</h2>
-      {userInfo ? <h2>Welcome, {userInfo.name}!</h2> : <h2></h2>}
-      <div className="form-container">
-        <h2>My Profile</h2>
+    <div className="form-container">
+      {userInfo ? <h2>Welcome back, {userInfo.name}!</h2> : <h2></h2>}
+      <h2>My Profile</h2>
+      <br />
+      {/* profile form  */}
+      <form onSubmit={handleSubmit}>
+        {/* full name input */}
+        <input
+          required
+          placeholder="Full Name"
+          type="text"
+          name="name"
+          id="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
         <br />
-        {/* profile form  */}
-        <form onSubmit={handleSubmit}>
-          {/* full name input */}
-          <input
-            required
-            placeholder="Full Name"
-            type="text"
-            name="name"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <br />
-          {/* email input */}
-          <input
-            required
-            placeholder="Email"
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <br />
-          {/* country input */}
-          <input
-            required
-            placeholder="Country"
-            type="text"
-            name="country"
-            id="country"
-            value={formData.country}
-            onChange={handleChange}
-          />
-          <br />
-          {/* bio input */}
-          <textarea
-            rows="10"
-            cols="45"
-            placeholder="Bio"
-            type="text"
-            name="bio"
-            id="bio"
-            value={formData.bio}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          {/* submit button */}
-          <button className="button" type="Submit">
-            Submit
-          </button>
-        </form>
-      </div>
+        {/* email input */}
+        <input
+          required
+          placeholder="Email"
+          type="email"
+          name="email"
+          id="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <br />
+        {/* country input */}
+        <input
+          required
+          placeholder="Country"
+          type="text"
+          name="country"
+          id="country"
+          value={formData.country}
+          onChange={handleChange}
+        />
+        <br />
+        {/* bio input */}
+        <textarea
+          rows="10"
+          cols="45"
+          placeholder="Bio"
+          type="text"
+          name="bio"
+          id="bio"
+          value={formData.bio}
+          onChange={handleChange}
+        />
+        <br />
+        <br />
+        {/* submit button */}
+        <button className="button" type="Submit">
+          Submit
+        </button>
+      </form>
     </div>
   );
 }

@@ -73,6 +73,13 @@ a {
     padding: 3rem;
 }
 
+.saved-countries-list {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
 .form-container {
     max-width: 490px;
     padding-top: 1rem;
