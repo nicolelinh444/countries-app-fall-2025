@@ -6,7 +6,7 @@ import PopulationWithCommas from "../components/PopulationWithCommas";
 function CountryDetail({ countriesData }) {
   // get the dynamic country name from the url
   const countryName = useParams().countryName;
-  // page views for counter
+  // start page views at 0
   const [pageViews, setPageViews] = useState(0);
 
   // find the country from the countries data that matches the url name
@@ -14,25 +14,46 @@ function CountryDetail({ countriesData }) {
     (country) => country.name.common === countryName
   );
 
+  // function updateCount () {
+  //   // check how many times country has been searched
+  //   // update country's search count in local storage
+  // }
+  // make a useEffect
+  // if countries exist, call the update count function
+  // dependency array: countries, country name
+
+  // increment page views per country
   useEffect(() => {
-    // store page views in local storage
-    const storedPageViews = localStorage.getItem("pageViews");
+    if (!currentCountry) return;
+    // create a key for each country
+    const key = `pageViews_${currentCountry.name.common}`;
+    // convert view count from a string to number, 0 if no value in local storage
+    const currentCount = parseInt(localStorage.getItem(key), 10) || 0;
+    // add 1 to count
+    const newCount = currentCount + 1;
 
-    // if stored page views exist, convert it to a base 10 integer and update the page views state variable with that number
-    if (storedPageViews) {
-      setPageViews(parseInt(storedPageViews, 10));
+    // save new count into local storage
+    localStorage.setItem(key, newCount);
+    // update page views variable to show new coount
+    setPageViews(newCount);
+    // runs when current country changes
+  }, [currentCountry]);
+
+  // saves country when user clicks save button
+  function saveOnClick() {
+    // gets saved countries array from local storage
+    // use empty array if no countries saved yet
+    const savedCountries =
+      JSON.parse(localStorage.getItem("savedCountries")) || [];
+
+    // check if current country has been saved
+    if (!savedCountries.includes(currentCountry.name.common)) {
+      // if not, add to saved countries array
+      savedCountries.push(currentCountry.name.common);
+      // save to local storage as a string
+      localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
     }
-
-    // set page views, pass in previous page views
-    setPageViews((prevPageViews) => {
-      // new page views equals previous page views + 1
-      const newPageViews = prevPageViews + 1;
-      // set page views in local storage to new page views
-      localStorage.setItem("pageViews", newPageViews);
-      // return updated page views
-      return newPageViews;
-    });
-  }, []);
+  }
 
   // if current country is not found, display error message
   if (!currentCountry) {
@@ -51,14 +72,6 @@ function CountryDetail({ countriesData }) {
       localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
     }
   }
-
-  // function updateCount () {
-  //   // check how many times country has been searched
-  //   // update country's search count in local storage
-  // }
-  // make a useEffect
-  // if countries exist, call the update count function
-  // dependency array: countries, country name
 
   return (
     <>
