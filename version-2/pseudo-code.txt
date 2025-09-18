@@ -73,31 +73,32 @@ Add more steps as needed!
 ------------------------
 🔶 RETRIEVING SAVED COUNTRIES DATA
 ------------------------
-WHEN: _______
-WHERE: _______
+WHEN: when the saved countries page loads
+WHERE: on the saved countries page, in between "Saved Countries" heading and welcome message
 HOW:
-Step 1: _______
-Step 2: _______
-Step 3: _______
+Step 1: use get item and parse to get saved countries from local storage
+Step 2: map through the list of saved countries
+Step 3: render the list to the screen 
 Add more steps as needed!
 ------------------------
 📊 COUNTRY COUNTS DATA
 ------------------------
 WHAT data should we store & retrieve?
-KEY: "_______"
-VALUE: _______
-VALUE DATA TYPE: _______
-EXAMPLE VALUE: _______
+KEY: "countryCounts"
+VALUE: count + 1
+VALUE DATA TYPE: number
+EXAMPLE VALUE: 
 ------------------------
 🔶 STORING & RETRIEVING COUNTRY COUNTS DATA
 ------------------------
 NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
-WHEN: _______
-WHERE: _______
-HOW:
-Step 1: _______
-Step 2: _______
-Step 3: _______
+WHEN: when component mounts
+WHERE: country details card
+HOW: add use effect that runs when component mounts. inside hook, check if localstorage has a key for page count. if it doesn't, set count to 1. if it does, add 1 to count. make counter render in country data
+Step 1: add use effect that runs when component mounts
+Step 2: inside hook, check if localstorage has a key for page count
+Step 3: if it doesn't, set count to 1. if it does, add 1 to count
+Step 4: render count in country card
 Add more steps as needed!
 
 

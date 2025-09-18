@@ -1,10 +1,13 @@
 // pages/CountryDetail.jsx
 import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import PopulationWithCommas from "../components/PopulationWithCommas";
 
 function CountryDetail({ countriesData }) {
   // get the dynamic country name from the url
   const countryName = useParams().countryName;
+  // page views for counter
+  const [pageViews, setPageViews] = useState(0);
 
   // find the country from the countries data that matches the url name
   const currentCountry = countriesData.find(
@@ -35,6 +38,26 @@ function CountryDetail({ countriesData }) {
       localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
     }
   }
+
+  useEffect(() => {
+    // store page views in local storage
+    const storedPageViews = localStorage.getItem("pageViews");
+
+    // if stored page views exist, convert it to a base 10 integer and update the page views state variable with that number
+    if (storedPageViews) {
+      setPageViews(parseInt(storedPageViews, 10));
+    }
+
+    // set page views, pass in previous page views
+    setPageViews((prevPageViews) => {
+      // new page views equals previous page views + 1
+      const newPageViews = prevPageViews + 1;
+      // set page views in local storage to new page views
+      localStorage.setItem("pageViews", newPageViews.toString());
+      // return updated page views
+      return newPageViews;
+    });
+  }, []);
 
   return (
     <>
@@ -70,6 +93,9 @@ function CountryDetail({ countriesData }) {
               {/* country capital */}
               <strong>Capital: </strong>
               {currentCountry.capital}
+            </p>
+            <p>
+              <strong>Viewed:</strong> {pageViews} times
             </p>
           </span>
         </span>
