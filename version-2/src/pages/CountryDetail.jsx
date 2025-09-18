@@ -14,31 +14,6 @@ function CountryDetail({ countriesData }) {
     (country) => country.name.common === countryName
   );
 
-  // if current country is not found, display error message
-  if (!currentCountry) {
-    return <h2>Country not found</h2>;
-  }
-
-  // click handler for save button
-  function saveOnClick() {
-    // declares a variable for saved countries
-    let savedCountries =
-      // get saved countries from local storage or an empty array if no countries are saved
-      JSON.parse(localStorage.getItem("savedCountries")) || [];
-    // checks if country has already been saved
-    const found = savedCountries.find(
-      (country) => country.name.common === currentCountry.name.common
-    );
-
-    // if country has not been saved yet
-    if (!found) {
-      // push current country to saved countries array
-      savedCountries.push(currentCountry);
-      // save to local storage
-      localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
-    }
-  }
-
   useEffect(() => {
     // store page views in local storage
     const storedPageViews = localStorage.getItem("pageViews");
@@ -53,11 +28,37 @@ function CountryDetail({ countriesData }) {
       // new page views equals previous page views + 1
       const newPageViews = prevPageViews + 1;
       // set page views in local storage to new page views
-      localStorage.setItem("pageViews", newPageViews.toString());
+      localStorage.setItem("pageViews", newPageViews);
       // return updated page views
       return newPageViews;
     });
   }, []);
+
+  // if current country is not found, display error message
+  if (!currentCountry) {
+    return <h2>Country not found</h2>;
+  }
+
+  // click handler for save button
+  function saveOnClick() {
+    // declares a variable for saved countries
+    let savedCountries =
+      // get saved countries from local storage or an empty array if no countries are saved
+      JSON.parse(localStorage.getItem("savedCountries")) || [];
+    // checks if country has already been saved
+    if (!savedCountries.includes(currentCountry.name.common)) {
+      savedCountries.push(currentCountry.name.common);
+      localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
+    }
+  }
+
+  // function updateCount () {
+  //   // check how many times country has been searched
+  //   // update country's search count in local storage
+  // }
+  // make a useEffect
+  // if countries exist, call the update count function
+  // dependency array: countries, country name
 
   return (
     <>

@@ -1,17 +1,22 @@
 import CountryCard from "../components/CountryCard";
 import SavedCountriesForm from "../components/Form";
 
-function SavedCountries() {
+function SavedCountries({ countriesData }) {
   // get list of saved countries from local storage
   let savedCountriesDestring =
-    JSON.parse(localStorage.getItem("savedCountries")) || [];
+    JSON.parse(localStorage.getItem("savedCountries")) || "[]";
+  console.log(savedCountriesDestring);
+
+  const filteredCountries = countriesData.filter((item) =>
+    savedCountriesDestring.includes(item.name.common)
+  );
 
   return (
     <div className="saved-countries-page">
       <h2>My Saved Countries</h2>
       <div className="saved-countries-list">
         {/* map through list of saved countries and render to the screen */}
-        {savedCountriesDestring.map((country, index) => (
+        {filteredCountries.map((country, index) => (
           <CountryCard key={index} country={country} />
         ))}
       </div>

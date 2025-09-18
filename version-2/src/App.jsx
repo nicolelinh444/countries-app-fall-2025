@@ -14,8 +14,9 @@ function App() {
   const getCountriesInfo = async () => {
     try {
       // url with parameters
-      const response = await fetch();
-      `https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders`;
+      const response = await fetch(
+        "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region,cca3,borders"
+      );
       // assigns the data from the API call to a variable
       const data = await response.json();
       // if data from api call exists: use data, if not use localData
