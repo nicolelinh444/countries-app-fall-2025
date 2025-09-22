@@ -4,10 +4,14 @@ import SavedCountriesForm from "../components/Form";
 function SavedCountries({ countriesData }) {
   // get list of saved countries from local storage
   let savedCountriesDestring =
+    // go through local storage and get savedCountries array
+    // OR if none exists, an empty array
     JSON.parse(localStorage.getItem("savedCountries")) || "[]";
-  console.log(savedCountriesDestring);
 
+  // declare a variable with a list of filtered countries
+  // filters through countries data
   const filteredCountries = countriesData.filter((item) =>
+    // checks if country name is also in saved countries destring
     savedCountriesDestring.includes(item.name.common)
   );
 

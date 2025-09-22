@@ -14,14 +14,6 @@ function CountryDetail({ countriesData }) {
     (country) => country.name.common === countryName
   );
 
-  // function updateCount () {
-  //   // check how many times country has been searched
-  //   // update country's search count in local storage
-  // }
-  // make a useEffect
-  // if countries exist, call the update count function
-  // dependency array: countries, country name
-
   // increment page views per country
   useEffect(() => {
     if (!currentCountry) return;
