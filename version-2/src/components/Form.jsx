@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 
 function SavedCountriesForm() {
+  // initial form state (starts as empty strings)
   const emptyFormState = { fullName: "", email: "", country: "", bio: "" };
   // stores form inputs
   const [formData, setFormData] = useState(emptyFormState);
   const [userInfo, setUserInfo] = useState(null);
 
-  // update formData variable when user input changes
+  // update formData object when user changes input field
   const handleChange = (event) => {
+    // gets input field's name and value
     const { name, value } = event.target;
+    // updates matching field in form data
     setFormData({ ...formData, [name]: value });
   };
 
@@ -16,22 +19,27 @@ function SavedCountriesForm() {
   function handleSubmit(event) {
     // prevents page from reloading
     event.preventDefault();
-    console.log(formData, "form was submitted");
-
     // turns form data into a string and saves it in local storage
     let formData_stringified = JSON.stringify(formData);
+    // saves string under "profile" in local storage
     localStorage.setItem("profile", formData_stringified);
 
+    // sets user info to form data
     setUserInfo(formData);
+    // sets form data to empty form state
     setFormData(emptyFormState);
   }
 
   // loads saved data on initial page load
   useEffect(() => {
+    // check if profile exists in local storage
     if (localStorage.getItem("profile")) {
+      // parse string back into profile object
       let profileDeStringified = JSON.parse(localStorage.getItem("profile"));
+      // updates user info state with parsed profile object
       setUserInfo(profileDeStringified);
     }
+    // run once on page load
   }, []);
 
   return (
