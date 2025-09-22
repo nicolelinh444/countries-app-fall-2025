@@ -52,19 +52,6 @@ function CountryDetail({ countriesData }) {
     return <h2>Country not found</h2>;
   }
 
-  // click handler for save button
-  function saveOnClick() {
-    // declares a variable for saved countries
-    let savedCountries =
-      // get saved countries from local storage or an empty array if no countries are saved
-      JSON.parse(localStorage.getItem("savedCountries")) || [];
-    // checks if country has already been saved
-    if (!savedCountries.includes(currentCountry.name.common)) {
-      savedCountries.push(currentCountry.name.common);
-      localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
-    }
-  }
-
   return (
     <>
       <div className="country-detail-card">
