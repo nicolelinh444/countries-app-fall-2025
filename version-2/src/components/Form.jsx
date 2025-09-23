@@ -26,7 +26,7 @@ function SavedCountriesForm() {
 
     // sets user info to form data
     setUserInfo(formData);
-    // sets form data to empty form state
+    // clear form now that the form is completed and data is captured
     setFormData(emptyFormState);
   }
 
@@ -44,7 +44,7 @@ function SavedCountriesForm() {
 
   return (
     <div className="form-container">
-      {userInfo ? <h2>Welcome back, {userInfo.name}!</h2> : <h2></h2>}
+      {userInfo && <h2>Welcome back, {userInfo.name}!</h2>}
       <h2>My Profile</h2>
       <br />
       {/* profile form  */}

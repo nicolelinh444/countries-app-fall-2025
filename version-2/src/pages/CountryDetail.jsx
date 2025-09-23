@@ -8,6 +8,8 @@ function CountryDetail({ countriesData }) {
   const countryName = useParams().countryName;
   // start page views at 0
   const [pageViews, setPageViews] = useState(0);
+  // check if country is saved
+  const [isSaved, setIsSaved] = useState(false);
 
   // find the country from the countries data that matches the url name
   const currentCountry = countriesData.find(
@@ -33,19 +35,31 @@ function CountryDetail({ countriesData }) {
 
   // saves country when user clicks save button
   function saveOnClick() {
-    // gets saved countries array from local storage
+    // declares saved countries
     // use empty array if no countries saved yet
-    const savedCountries =
+    let savedCountries =
       JSON.parse(localStorage.getItem("savedCountries")) || [];
 
+    const name = currentCountry.name.common;
+
+    // setter function for isSaved from false to true
+
     // check if current country has been saved
-    if (!savedCountries.includes(currentCountry.name.common)) {
+    if (savedCountries.includes(name)) {
+      savedCountries = savedCountries.filter((item) => item !== name);
+      setIsSaved(false);
+    } else {
       // if not, add to saved countries array
-      savedCountries.push(currentCountry.name.common);
-      // save to local storage as a string
-      localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
+      savedCountries.push(name);
+      setIsSaved(true);
     }
+    // save to local storage as a string
+    localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
   }
+
+  // function removeItem() {
+  //   localStorage.removeItem.
+  // }
 
   // if current country is not found, display error message
   if (!currentCountry) {
@@ -70,7 +84,7 @@ function CountryDetail({ countriesData }) {
             <h1>{currentCountry.name.common}</h1>
             {/* save button */}
             <Link onClick={saveOnClick} className="button-style">
-              Save{" "}
+              {isSaved ? "❤️" : "🤍"}
             </Link>
             <p>
               {/* country population */}

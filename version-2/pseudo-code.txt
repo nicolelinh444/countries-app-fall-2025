@@ -84,21 +84,24 @@ Add more steps as needed!
 📊 COUNTRY COUNTS DATA
 ------------------------
 WHAT data should we store & retrieve?
-KEY: "countryCounts"
-VALUE: count + 1
+KEY: "the country's name"
+VALUE: country's view count as a number
 VALUE DATA TYPE: number
-EXAMPLE VALUE: 
+EXAMPLE VALUE: 5
 ------------------------
 🔶 STORING & RETRIEVING COUNTRY COUNTS DATA
 ------------------------
 NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
 WHEN: when component mounts
-WHERE: country details card
+WHERE: country details page
 HOW: add use effect that runs when component mounts. inside hook, check if localstorage has a key for page count. if it doesn't, set count to 1. if it does, add 1 to count. make counter render in country data
-Step 1: add use effect that runs when component mounts
-Step 2: inside hook, check if localstorage has a key for page count
-Step 3: if it doesn't, set count to 1. if it does, add 1 to count
-Step 4: render count in country card
+Step 1: useState for page views]
+Step 2: add use effect that runs when component mounts
+Step 3: inside hook, check if localstorage has a key for page count
+Step 4: if it doesn't, set count to 1. if it does, add 1 to count
+Step 5: store the new number in local storage
+Step 6: update the value of page views using set view count
+Step 6: render count in country card
 Add more steps as needed!
 
 
