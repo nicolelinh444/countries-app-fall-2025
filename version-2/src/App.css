@@ -123,9 +123,9 @@ a {
 }
 
 .button-style {
+    background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: 5px;
-    margin: 75px 0px 75px 0px;
     padding: .5rem 1.2rem .5rem 1.2rem;
     box-shadow: 0px 0px 5px var(--dark-gray);
 }

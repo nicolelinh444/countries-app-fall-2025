@@ -1,5 +1,5 @@
 // pages/CountryDetail.jsx
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PopulationWithCommas from "../components/PopulationWithCommas";
 
@@ -10,6 +10,7 @@ function CountryDetail({ countriesData }) {
   const [pageViews, setPageViews] = useState(0);
   // check if country is saved
   const [isSaved, setIsSaved] = useState(false);
+  const navigate = useNavigate();
 
   // find the country from the countries data that matches the url name
   const currentCountry = countriesData.find(
@@ -42,8 +43,6 @@ function CountryDetail({ countriesData }) {
 
     const name = currentCountry.name.common;
 
-    // setter function for isSaved from false to true
-
     // check if current country has been saved
     if (savedCountries.includes(name)) {
       savedCountries = savedCountries.filter((item) => item !== name);
@@ -57,10 +56,6 @@ function CountryDetail({ countriesData }) {
     localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
   }
 
-  // function removeItem() {
-  //   localStorage.removeItem.
-  // }
-
   // if current country is not found, display error message
   if (!currentCountry) {
     return <h2>Country not found</h2>;
@@ -70,9 +65,9 @@ function CountryDetail({ countriesData }) {
     <>
       <div className="country-detail-card">
         {/* back button, links to home page */}
-        <Link to="/" className="button-style">
+        <button onClick={() => navigate(-1)} className="button-style">
           ← Back
-        </Link>
+        </button>
         <span className="country-detail-box">
           {/* country flag image */}
           <img
