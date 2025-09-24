@@ -1,0 +1,184 @@
+-------------------------------------
+🧠 VERSION 3 PSEUDO-CODE WORKSHEET 
+-------------------------------------
+
+This is our WHAT, WHEN, WHERE, HOW framework for working with data:
+
+1. WHAT data should we store & retrieve? 
+   What kind of HTTP request do we need to send, and to what API endpoint? 
+   If we are sending a POST request, what do we need to send in the request body, and what is the data type? 
+   What would we get back in the response, and what is the data type? 
+  
+2. WHEN should we store & retrieve the data? 
+   What event or user action is the trigger, such as clicking a button, submitting a form, or loading a page? 
+
+3. WHERE does this happen in the code? 
+   What component, page or function? 
+
+4. HOW do we accomplish this? 
+   What steps do we need to take? 
+   Do we need to...
+    - make any GET or POST requests to an API endpoint? 
+    - render anything in JSX? 
+    - make any functions? If so, when would we call those functions? 
+    - use any useState or useEffect hooks? 
+  Remember: This is pseudo-code. Don't write code yet — just outline the actions in plain language. 
+
+✨ YOUR TASK: Fill in the answers to each WHAT/WHEN/WHERE/HOW question below for the 3 pieces of data. 
+
+------------------------
+📊 FORM DATA 
+------------------------
+
+------------------------
+🔶 STORING FORM DATA 
+------------------------
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): POST
+  API ENDPOINT: /add-one-user
+
+  REQUEST BODY DATA TYPE (if applicable): OBJECT
+  REQUEST BODY (if applicable): {
+  "name": "Alice",
+  "country_name": "Germany",
+  "email": "alice@example.com",
+  "bio": "A little about Alice"
+}
+  
+  RESPONSE DATA TYPE: STRING
+  RESPONSE: Success! User has been added.
+
+WHEN: WHEN THE USER CLICKS SUBMIT
+
+WHERE: HANDLE SUBMIT, SAVED COUNTRIES PAGE
+
+HOW: 
+Step 1: IN THE HANDLE SUBMIT, DELETE THE CODE THAT SAVES DATA INTO LOCAL STORAGE
+Step 2: REPLACE IT WITH ASYNC API POST REQUEST
+Add more steps as needed! 
+
+------------------------
+🔶 RETRIEVING FORM DATA 
+------------------------
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): GET
+  API ENDPOINT: /get-newest-user
+
+  REQUEST BODY DATA TYPE (if applicable): N/A
+  REQUEST BODY (if applicable): N/A
+  
+  RESPONSE DATA TYPE: ARRAY OF OBJECTS (1 OBJECT)
+  RESPONSE: [
+  {
+    "user_id": 42,
+    "name": "John Smith",
+    "country_name": "Canada",
+    "email": "john@example.com",
+    "bio": "Another bio"
+  }
+]
+  
+WHEN: INITIAL PAGE LOAD
+
+WHERE: USE EFFECT ON FORM 
+
+HOW: 
+Step 1: CHECK IF USER PROFILE FROM DATA SUBMITTED TO FORM EXISTS IN API
+Step 2: IF IT EXISTS, GET BACK AN OBJECT
+Step 3: UPDATE STATE VARIABLE WITH PROFILE OBJECT
+Add more steps as needed! 
+
+------------------------
+📊 SAVED COUNTRIES DATA 
+------------------------
+
+------------------------
+🔶 STORING SAVED COUNTRIES DATA 
+------------------------
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): POST
+  API ENDPOINT: /save-one-country
+
+  REQUEST BODY DATA TYPE (if applicable): OBJECT
+  REQUEST BODY (if applicable): {
+  "country_name": "Brazil"
+}
+  
+  RESPONSE DATA TYPE: STRING
+  RESPONSE: Success! The country is saved.
+
+WHEN: WHEN USER CLICKS SAVE BUTTON ON COUNTRY DETAIL PAGE
+
+WHERE: SAVE ON CLICK FUNCTION 
+
+HOW: 
+Step 1: DECLARE SAVED COUNTRIES VARIABLE
+Step 2: CHECK IF THERE ARE COUNTRIES SAVED, IF NOT USE EMPTY ARRAY
+Step 3: MAP THROUGH SAVED COUNTRIES AND CHECK IF CURRENT COUNTRY HAS BEEN SAVED
+Step 4: IF NOT, POST TO API
+Add more steps as needed! 
+
+------------------------
+🔶 RETRIEVING SAVED COUNTRIES DATA 
+------------------------
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): GET
+  API ENDPOINT: /get-all-saved-countries
+
+  REQUEST BODY DATA TYPE (if applicable): N/A
+  REQUEST BODY (if applicable): N/A
+  
+  RESPONSE DATA TYPE: ARRAY OF OBJECTS
+  RESPONSE: [
+  {
+    "country_name": "Japan"
+  },
+  {
+    "country_name": "Germany"
+  }
+]
+
+WHEN: WHEN PAGE LOADS
+
+WHERE: IN SAVED COUNTRIES FUNCTION
+
+HOW: 
+Step 1: GET LIST OF SAVED COUNTRIES FROM API
+Step 2: IF NONE EXISTS, USED EMPTY ARRAY
+Step 3: RENDER SAVED COUNTRIES TO PAGE
+Add more steps as needed! 
+
+------------------------
+📊 COUNTRY COUNTS DATA 
+------------------------
+
+------------------------
+🔶 STORING & RETRIEVING COUNTRY COUNTS DATA 
+------------------------
+NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): POST
+  API ENDPOINT: /update-one-country-count
+
+  REQUEST BODY DATA TYPE (if applicable): OBJECT
+  REQUEST BODY (if applicable): {
+  "country_name": "France"
+}_
+  
+  RESPONSE DATA TYPE: OBJECT
+  RESPONSE: {
+  "count": 3
+}
+  
+WHEN: WHEN PAGE LOADS
+
+WHERE: COUNTRY DETAILS PAGE
+
+HOW: 
+Step 1: WHEN THE PAGE LOADS, ADD 1 TO COUNTRY COUNT IN API
+Step 2: RENDER UPDATED COUNT TO THE PAGE
+Add more steps as needed! 
