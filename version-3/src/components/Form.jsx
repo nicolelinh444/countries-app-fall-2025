@@ -15,51 +15,55 @@ function SavedCountriesForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  async function storeUserData(data) {
-    await fetch("https://backend-answer-keys.onrender.com/add-one-user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: data.fullName,
-        email: data.email,
-        country_name: data.country,
-        bio: data.bio,
-      }),
-    });
-  }
+  const storeUserData = async () => {
+    const response = await fetch(
+      "https://backend-answer-keys.onrender.com/add-one-user",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          country_name: formData.country,
+          email: formData.email,
+          bio: formData.bio,
+        }),
+      }
+    );
+  };
 
   // handle form submission
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     // prevents page from reloading
     event.preventDefault();
+    console.log(formData);
 
-    storeUserData(formData);
+    storeUserData();
     // sets user info to form data
     setUserInfo(formData);
     // clear form now that the form is completed and data is captured
     setFormData(emptyFormState);
-  }
+  };
 
-  const getUser = async () => {
+  const getNewestUser = async () => {
     const response = await fetch(
       "https://backend-answer-keys.onrender.com/get-newest-user"
     );
     const data = await response.json();
-    const userData = data[0];
-    console.log(userData);
+    console.log(data);
+    const newestUserFromAPI = data[0];
     setUserInfo({
-      fullName: userData.name,
-      email: userData.email,
-      country: userData.country_name,
-      bio: userData.bio,
+      fullName: newestUserFromAPI.name,
+      email: newestUserFromAPI.email,
+      country: newestUserFromAPI.country,
+      bio: newestUserFromAPI.bio,
     });
   };
 
   // loads saved data on initial page load
   useEffect(() => {
-    getUser();
+    getNewestUser();
   }, []);
 
   return (
@@ -74,9 +78,9 @@ function SavedCountriesForm() {
           required
           placeholder="Full Name"
           type="text"
-          name="name"
-          id="name"
-          value={formData.name}
+          name="fullName"
+          id="fullName"
+          value={formData.fullName}
           onChange={handleChange}
         />
         <br />
@@ -116,7 +120,7 @@ function SavedCountriesForm() {
         <br />
         <br />
         {/* submit button */}
-        <button className="button" type="Submit">
+        <button className="button" type="submit">
           Submit
         </button>
       </form>
