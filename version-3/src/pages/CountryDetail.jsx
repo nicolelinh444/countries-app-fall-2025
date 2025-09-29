@@ -34,37 +34,21 @@ function CountryDetail({ countriesData }) {
   //   // runs when current country changes
   // }, [currentCountry]);
 
-  const getSavedCountries = async (currentCountry) => {
-    try {
-      const response = await fetch(
-        "https://backend-answer-keys.onrender.com/save-one-country",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            country_name: currentCountry.name.common,
-          }),
-        }
-      );
-
-      const savedCountries = await response.json();
-      console.log("Saved Countries", savedCountries);
-
-      // map through saved countries and get each country name
-      // find the countries in the countries data list that match the name
-
-      const allSavedCountries = savedCountries.map((countryName) => {
-        return countriesData.find(
-          (countryObject) => countryObject.name.common === countryName
-        );
-      });
-
-      return allSavedCountries;
-    } catch (error) {
-      console.log("Error fetching saved countries", error);
-    }
+  // saves country when user clicks save button
+  const saveOnClick = async () => {
+    const response = await fetch(
+      "https://backend-answer-keys.onrender.com/save-one-country",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country_name: currentCountry.name.common,
+        }),
+      }
+    );
+    setIsSaved(true);
   };
 
   // if current country is not found, display error message
@@ -89,9 +73,10 @@ function CountryDetail({ countriesData }) {
             {/* country name */}
             <h1>{currentCountry.name.common}</h1>
             {/* save button */}
-            {/* <button onClick={saveOnClick} className="button-style">
+            {/* will fix functionality of button color later */}
+            <button onClick={saveOnClick} className="button-style">
               {isSaved ? "❤️" : "🤍"}
-            </button> */}
+            </button>
             <p>
               {/* country population */}
               <strong>Population: </strong>
