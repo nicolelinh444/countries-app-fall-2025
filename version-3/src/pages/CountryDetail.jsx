@@ -17,44 +17,55 @@ function CountryDetail({ countriesData }) {
     (country) => country.name.common === countryName
   );
 
-  // increment page views per country
-  useEffect(() => {
-    if (!currentCountry) return;
-    // create a key for each country
-    const key = `pageViews_${currentCountry.name.common}`;
-    // convert view count from a string to number, 0 if no value in local storage
-    const currentCount = parseInt(localStorage.getItem(key), 10) || 0;
-    // add 1 to count
-    const newCount = currentCount + 1;
+  // // increment page views per country
+  // useEffect(() => {
+  //   if (!currentCountry) return;
+  //   // create a key for each country
+  //   const key = `pageViews_${currentCountry.name.common}`;
+  //   // convert view count from a string to number, 0 if no value in local storage
+  //   const currentCount = parseInt(localStorage.getItem(key), 10) || 0;
+  //   // add 1 to count
+  //   const newCount = currentCount + 1;
 
-    // save new count into local storage
-    localStorage.setItem(key, newCount);
-    // update page views variable to show new coount
-    setPageViews(newCount);
-    // runs when current country changes
-  }, [currentCountry]);
+  //   // save new count into local storage
+  //   localStorage.setItem(key, newCount);
+  //   // update page views variable to show new coount
+  //   setPageViews(newCount);
+  //   // runs when current country changes
+  // }, [currentCountry]);
 
-  // saves country when user clicks save button
-  function saveOnClick() {
-    // declares saved countries
-    // use empty array if no countries saved yet
-    let savedCountries =
-      JSON.parse(localStorage.getItem("savedCountries")) || [];
+  const getSavedCountries = async (currentCountry) => {
+    try {
+      const response = await fetch(
+        "https://backend-answer-keys.onrender.com/save-one-country",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            country_name: currentCountry.name.common,
+          }),
+        }
+      );
 
-    const name = currentCountry.name.common;
+      const savedCountries = await response.json();
+      console.log("Saved Countries", savedCountries);
 
-    // check if current country has been saved
-    if (savedCountries.includes(name)) {
-      savedCountries = savedCountries.filter((item) => item !== name);
-      setIsSaved(false);
-    } else {
-      // if not, add to saved countries array
-      savedCountries.push(name);
-      setIsSaved(true);
+      // map through saved countries and get each country name
+      // find the countries in the countries data list that match the name
+
+      const allSavedCountries = savedCountries.map((countryName) => {
+        return countriesData.find(
+          (countryObject) => countryObject.name.common === countryName
+        );
+      });
+
+      return allSavedCountries;
+    } catch (error) {
+      console.log("Error fetching saved countries", error);
     }
-    // save to local storage as a string
-    localStorage.setItem("savedCountries", JSON.stringify(savedCountries));
-  }
+  };
 
   // if current country is not found, display error message
   if (!currentCountry) {
@@ -78,9 +89,9 @@ function CountryDetail({ countriesData }) {
             {/* country name */}
             <h1>{currentCountry.name.common}</h1>
             {/* save button */}
-            <Link onClick={saveOnClick} className="button-style">
+            {/* <button onClick={saveOnClick} className="button-style">
               {isSaved ? "❤️" : "🤍"}
-            </Link>
+            </button> */}
             <p>
               {/* country population */}
               <strong>Population: </strong>
