@@ -11,14 +11,15 @@ function SavedCountries({ countriesData }) {
         "https://backend-answer-keys.onrender.com/get-all-saved-countries"
       );
       const savedCountriesList = await response.json();
-      // map through saved countries and get each country name
-      // find the countries in the countries data list that match the name
+      console.log("data:", savedCountriesList);
 
-      const allSavedCountries = savedCountriesList.map((countryName) =>
+      const allSavedCountries = savedCountriesList.map((savedCountry) =>
         countriesData.find(
-          (countryObject) => countryObject.name.common === countryName
+          (countryObject) =>
+            savedCountry.country_name === countryObject.name.common
         )
       );
+      console.log("allSavedCountries", allSavedCountries);
       setSavedCountries(allSavedCountries);
     } catch (error) {
       console.log("Error fetching saved countries", error);

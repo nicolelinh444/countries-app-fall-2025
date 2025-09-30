@@ -4,6 +4,7 @@ import PopulationWithCommas from "./PopulationWithCommas";
 // renders individual CountryCard
 // receives a single country object (passed in from Home.jsx)
 function CountryCard({ country }) {
+  if (!country) return null;
   return (
     // Links each card to its country detail page
     <Link to={`/country-detail/${country.name.common}`}>
