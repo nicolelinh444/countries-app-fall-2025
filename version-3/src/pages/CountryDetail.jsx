@@ -1,5 +1,5 @@
 // pages/CountryDetail.jsx
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PopulationWithCommas from "../components/PopulationWithCommas";
 
@@ -10,13 +10,15 @@ function CountryDetail({ countriesData }) {
   const [pageCount, setPageCount] = useState(0);
   // check if country is saved
   const [isSaved, setIsSaved] = useState(false);
+  // use navigate to make the back button functional
   const navigate = useNavigate();
 
-  // find the country from the countries data that matches the url name
+  // find the country from the countries data that matches the url name and save it as currentCountry
   const currentCountry = countriesData.find(
     (country) => country.name.common === countryName
   );
 
+  // api call to update country count
   const updateOneCountryCount = async () => {
     const response = await fetch(
       "https://backend-answer-keys.onrender.com/update-one-country-count",
@@ -30,10 +32,13 @@ function CountryDetail({ countriesData }) {
         }),
       }
     );
+    // declare a variable to store data from api call
     const data = await response.json();
+    // set useState for page count to count from data
     setPageCount(data.count);
   };
 
+  // call updateOneCountryCount when page loads and pass in name of country
   useEffect(() => {
     updateOneCountryCount(countryName);
   }, []);
@@ -52,6 +57,7 @@ function CountryDetail({ countriesData }) {
         }),
       }
     );
+    // change boolean value of isSaved to true
     setIsSaved(true);
   };
 

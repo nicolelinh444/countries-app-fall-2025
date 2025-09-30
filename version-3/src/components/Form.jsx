@@ -15,6 +15,7 @@ function SavedCountriesForm() {
     setFormData({ ...formData, [name]: value });
   };
 
+  // storeUserData from user's form input
   const storeUserData = async () => {
     const response = await fetch(
       "https://backend-answer-keys.onrender.com/add-one-user",
@@ -46,12 +47,12 @@ function SavedCountriesForm() {
     setFormData(emptyFormState);
   };
 
+  // getNewestUser data from api
   const getNewestUser = async () => {
     const response = await fetch(
       "https://backend-answer-keys.onrender.com/get-newest-user"
     );
     const data = await response.json();
-    console.log(data);
     const newestUserFromAPI = data[0];
     setUserInfo({
       fullName: newestUserFromAPI.name,
