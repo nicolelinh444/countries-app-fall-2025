@@ -7,7 +7,7 @@ function CountryDetail({ countriesData }) {
   // get the dynamic country name from the url
   const countryName = useParams().countryName;
   // start page views at 0
-  const [pageViews, setPageViews] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
   // check if country is saved
   const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
@@ -17,22 +17,26 @@ function CountryDetail({ countriesData }) {
     (country) => country.name.common === countryName
   );
 
-  // // increment page views per country
-  // useEffect(() => {
-  //   if (!currentCountry) return;
-  //   // create a key for each country
-  //   const key = `pageViews_${currentCountry.name.common}`;
-  //   // convert view count from a string to number, 0 if no value in local storage
-  //   const currentCount = parseInt(localStorage.getItem(key), 10) || 0;
-  //   // add 1 to count
-  //   const newCount = currentCount + 1;
+  const updateOneCountryCount = async () => {
+    const response = await fetch(
+      "https://backend-answer-keys.onrender.com/update-one-country-count",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country_name: countryName,
+        }),
+      }
+    );
+    const data = await response.json();
+    setPageCount(data.count);
+  };
 
-  //   // save new count into local storage
-  //   localStorage.setItem(key, newCount);
-  //   // update page views variable to show new coount
-  //   setPageViews(newCount);
-  //   // runs when current country changes
-  // }, [currentCountry]);
+  useEffect(() => {
+    updateOneCountryCount(countryName);
+  }, []);
 
   // saves country when user clicks save button
   const saveOnClick = async () => {
@@ -93,7 +97,7 @@ function CountryDetail({ countriesData }) {
               {currentCountry.capital}
             </p>
             <p>
-              <strong>Viewed:</strong> {pageViews} times
+              <strong>Viewed:</strong> {pageCount} times
             </p>
           </span>
         </span>
