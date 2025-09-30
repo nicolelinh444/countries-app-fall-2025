@@ -43,38 +43,25 @@ function CountryDetail({ countriesData }) {
     updateOneCountryCount(countryName);
   }, []);
 
-  // saves country when user clicks save button
-  const saveOnClick = async () => {
-    const response1 = await fetch(
-      "https://backend-answer-keys.onrender.com/save-one-country",
-      {
+  const toggleSave = async () => {
+    if (isSaved) {
+      await fetch(
+        "https://backend-answer-keys.onrender.com/unsave-one-country",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ country_name: currentCountry.name.common }),
+        }
+      );
+      setIsSaved(false);
+    } else {
+      await fetch("https://backend-answer-keys.onrender.com/save-one-country", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          country_name: currentCountry.name.common,
-        }),
-      }
-    );
-    // change boolean value of isSaved to true
-    setIsSaved(true);
-  };
-
-  const unsaveOnClick = async () => {
-    const response2 = await fetch(
-      "https://backend-answer-keys.onrender.com/unsave-one-country",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          country_name: currentCountry.name.common,
-        }),
-      }
-    );
-    setIsSaved(false);
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ country_name: currentCountry.name.common }),
+      });
+      setIsSaved(true);
+    }
   };
 
   // if current country is not found, display error message
@@ -100,13 +87,8 @@ function CountryDetail({ countriesData }) {
             <h1>{currentCountry.name.common}</h1>
             {/* save button */}
             {/* will fix functionality of button color later */}
-            <button onClick={saveOnClick} className="button-style">
+            <button onClick={toggleSave} className="button-style">
               {isSaved ? "❤️" : "🤍"}
-            </button>
-            <br />
-            <br />
-            <button onClick={unsaveOnClick} className="button-style">
-              Unsave
             </button>
             <p>
               {/* country population */}
