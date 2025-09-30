@@ -9,7 +9,7 @@ function CountryDetail({ countriesData }) {
   // start page views at 0
   const [pageCount, setPageCount] = useState(0);
   // check if country is saved
-  const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState();
   // use navigate to make the back button functional
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ function CountryDetail({ countriesData }) {
 
   // saves country when user clicks save button
   const saveOnClick = async () => {
-    const response = await fetch(
+    const response1 = await fetch(
       "https://backend-answer-keys.onrender.com/save-one-country",
       {
         method: "POST",
@@ -59,6 +59,22 @@ function CountryDetail({ countriesData }) {
     );
     // change boolean value of isSaved to true
     setIsSaved(true);
+  };
+
+  const unsaveOnClick = async () => {
+    const response2 = await fetch(
+      "https://backend-answer-keys.onrender.com/unsave-one-country",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country_name: currentCountry.name.common,
+        }),
+      }
+    );
+    setIsSaved(false);
   };
 
   // if current country is not found, display error message
@@ -86,6 +102,11 @@ function CountryDetail({ countriesData }) {
             {/* will fix functionality of button color later */}
             <button onClick={saveOnClick} className="button-style">
               {isSaved ? "❤️" : "🤍"}
+            </button>
+            <br />
+            <br />
+            <button onClick={unsaveOnClick} className="button-style">
+              Unsave
             </button>
             <p>
               {/* country population */}
