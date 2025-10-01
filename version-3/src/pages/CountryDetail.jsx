@@ -5,13 +5,13 @@ import PopulationWithCommas from "../components/PopulationWithCommas";
 
 function CountryDetail({ countriesData }) {
   // get the dynamic country name from the url
+  // use navigate to make the back button functional
   const countryName = useParams().countryName;
+  const navigate = useNavigate();
+
   // start page views at 0
   const [pageCount, setPageCount] = useState(0);
-  // check if country is saved
-  const [isSaved, setIsSaved] = useState();
-  // use navigate to make the back button functional
-  const navigate = useNavigate();
+  const [isSaved, setIsSaved] = useState(false);
 
   // find the country from the countries data that matches the url name and save it as currentCountry
   const currentCountry = countriesData.find(
@@ -38,36 +38,39 @@ function CountryDetail({ countriesData }) {
     setPageCount(data.count);
   };
 
+  // api call to check if country is already saved
+  const checkIfSaved = async () => {
+    const response1 = await fetch(
+      "https://backend-answer-keys.onrender.com/get-all-saved-countries"
+    );
+    const data1 = await response1.json();
+    const savedCheck = data1.find(
+      (savedCountry) => savedCountry.country_name === countryName
+    );
+
+    setIsSaved(!!savedCheck);
+  };
+
   // declares an async function to toggle the save button
   const toggleSave = async () => {
     // checks if country has been saved
     if (isSaved) {
-      // if it's saved, fetch call
+      // if it's saved, fetch
       await fetch(
-        // API endpoint /unsave-one-country
         "https://backend-answer-keys.onrender.com/unsave-one-country",
         {
-          // POST request
-          // HTTP method
           method: "POST",
-          // headers,
           headers: { "Content-Type": "application/json" },
-          // request body, converts country name to JSON
           body: JSON.stringify({ country_name: currentCountry.name.common }),
         }
       );
       // updates state variable to false
       setIsSaved(false);
-      // if country is not saved, fetch call
+      // if country is not saved, fetch
     } else {
-      // API endpoint /save-one-country
       await fetch("https://backend-answer-keys.onrender.com/save-one-country", {
-        // POST request
-        // HTTP method
         method: "POST",
-        // headers
         headers: { "Content-Type": "application/json" },
-        // request body, converts country name to JSON
         body: JSON.stringify({ country_name: currentCountry.name.common }),
       });
       // updates state variable to true
@@ -82,8 +85,11 @@ function CountryDetail({ countriesData }) {
 
   // call updateOneCountryCount when page loads and pass in name of country
   useEffect(() => {
+    if (!currentCountry) return;
+
+    checkIfSaved();
     updateOneCountryCount(countryName);
-  }, []);
+  }, [currentCountry, countryName]);
 
   return (
     <>
