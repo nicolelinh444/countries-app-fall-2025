@@ -5,11 +5,11 @@ import PopulationWithCommas from "../components/PopulationWithCommas";
 
 function CountryDetail({ countriesData }) {
   // get the dynamic country name from the url
-  // use navigate to make the back button functional
   const countryName = useParams().countryName;
+  // use navigate to make the back button functional
   const navigate = useNavigate();
 
-  // start page views at 0
+  // useState variables
   const [pageCount, setPageCount] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
 
@@ -47,7 +47,6 @@ function CountryDetail({ countriesData }) {
     const savedCheck = data1.find(
       (savedCountry) => savedCountry.country_name === countryName
     );
-
     setIsSaved(!!savedCheck);
   };
 
@@ -83,12 +82,16 @@ function CountryDetail({ countriesData }) {
     return <h2>Country not found</h2>;
   }
 
-  // call updateOneCountryCount when page loads and pass in name of country
+  // if
   useEffect(() => {
+    // if currentCountry has not been found, exit
     if (!currentCountry) return;
 
+    // call API to see if country has been saved
     checkIfSaved();
+    // call API to update and fetch page view count
     updateOneCountryCount(countryName);
+    // runs when selected country changes and when url parameter changes
   }, [currentCountry, countryName]);
 
   return (
