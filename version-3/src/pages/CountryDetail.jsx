@@ -38,28 +38,39 @@ function CountryDetail({ countriesData }) {
     setPageCount(data.count);
   };
 
-  // call updateOneCountryCount when page loads and pass in name of country
-  useEffect(() => {
-    updateOneCountryCount(countryName);
-  }, []);
-
+  // declares an async function to toggle the save button
   const toggleSave = async () => {
+    // checks if country has been saved
     if (isSaved) {
+      // if it's saved, fetch call
       await fetch(
+        // API endpoint /unsave-one-country
         "https://backend-answer-keys.onrender.com/unsave-one-country",
         {
+          // POST request
+          // HTTP method
           method: "POST",
+          // headers,
           headers: { "Content-Type": "application/json" },
+          // request body, converts country name to JSON
           body: JSON.stringify({ country_name: currentCountry.name.common }),
         }
       );
+      // updates state variable to false
       setIsSaved(false);
+      // if country is not saved, fetch call
     } else {
+      // API endpoint /save-one-country
       await fetch("https://backend-answer-keys.onrender.com/save-one-country", {
+        // POST request
+        // HTTP method
         method: "POST",
+        // headers
         headers: { "Content-Type": "application/json" },
+        // request body, converts country name to JSON
         body: JSON.stringify({ country_name: currentCountry.name.common }),
       });
+      // updates state variable to true
       setIsSaved(true);
     }
   };
@@ -68,6 +79,11 @@ function CountryDetail({ countriesData }) {
   if (!currentCountry) {
     return <h2>Country not found</h2>;
   }
+
+  // call updateOneCountryCount when page loads and pass in name of country
+  useEffect(() => {
+    updateOneCountryCount(countryName);
+  }, []);
 
   return (
     <>
