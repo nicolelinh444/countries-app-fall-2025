@@ -104,5 +104,8 @@ ____________________________
 🔹 POST /update-one-country-count  
 Description: Updates (or initializes) the view count for a country.  
 Your SQL command:
-SELECT * FROM country_counts;
+INSERT INTO country_counts (country_name, count)
+VALUES ($1, 1)
+DO UPDATE SET count = country_counts.count + 1
+RETURNING *;
 ____________________________

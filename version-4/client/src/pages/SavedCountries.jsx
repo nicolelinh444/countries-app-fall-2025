@@ -9,7 +9,7 @@ function SavedCountries({ countriesData }) {
   // api call to retrieve saved country data
   const getSavedCountries = async () => {
     try {
-      const response = await fetch("/api/get-all-saved-countries");
+      const response = await fetch("/get-all-saved-countries");
 
       // declare variable to store list of saved countries
       const savedCountriesData = await response.json();
