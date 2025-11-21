@@ -31,6 +31,7 @@ function CountryDetail({ countriesData }) {
     });
     // declare a variable to store data from api call
     const data = await response.json();
+
     // set useState for page count to count from data
     setPageCount(data.count);
   };
