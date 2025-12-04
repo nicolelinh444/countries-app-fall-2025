@@ -1,0 +1,216 @@
+-------------------------------------
+🧠 VERSION 3 PSEUDO-CODE WORKSHEET 
+-------------------------------------
+
+This is our WHAT, WHEN, WHERE, HOW framework for working with data:
+
+1. WHAT data should we store & retrieve? 
+   What kind of HTTP request do we need to send, and to what API endpoint? 
+   If we are sending a POST request, what do we need to send in the request body, and what is the data type? 
+   What would we get back in the response, and what is the data type? 
+  
+2. WHEN should we store & retrieve the data? 
+   What event or user action is the trigger, such as clicking a button, submitting a form, or loading a page? 
+
+3. WHERE does this happen in the code? 
+   What component, page or function? 
+
+4. HOW do we accomplish this? 
+   What steps do we need to take? 
+   Do we need to...
+    - make any GET or POST requests to an API endpoint? 
+    - render anything in JSX? 
+    - make any functions? If so, when would we call those functions? 
+    - use any useState or useEffect hooks? 
+  Remember: This is pseudo-code. Don't write code yet — just outline the actions in plain language. 
+
+✨ YOUR TASK: Fill in the answers to each WHAT/WHEN/WHERE/HOW question below for the 3 pieces of data. 
+
+------------------------
+📊 FORM DATA 
+------------------------
+
+------------------------
+🔶 STORING FORM DATA 
+------------------------
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): POST
+  API ENDPOINT: /add-one-user
+
+  REQUEST BODY DATA TYPE (if applicable): OBJECT
+  REQUEST BODY (if applicable): {
+  "name": "Alice",
+  "country_name": "Germany",
+  "email": "alice@example.com",
+  "bio": "A little about Alice"
+}
+  
+  RESPONSE DATA TYPE: STRING
+  RESPONSE: Success! User has been added.
+
+WHEN: WHEN THE USER CLICKS SUBMIT
+
+WHERE: HANDLE SUBMIT, SAVED COUNTRIES PAGE
+
+HOW: 
+Step 1: DECLARE A NEW FUNCTION CALLED storeUserData() WHICH SHOULD SEND A POST REQUEST TO THE API TO THE /add-one-user ENDPOINT
+Step 2: CALL THE storeUserData() FUNCTION ON SUBMIT
+Add more steps as needed! 
+
+------------------------
+🔶 RETRIEVING FORM DATA 
+------------------------
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): GET
+  API ENDPOINT: /get-newest-user
+
+  REQUEST BODY DATA TYPE (if applicable): N/A
+  REQUEST BODY (if applicable): N/A
+  
+  RESPONSE DATA TYPE: ARRAY OF OBJECTS (1 OBJECT)
+  RESPONSE: [
+  {
+    "user_id": 42,
+    "name": "John Smith",
+    "country_name": "Canada",
+    "email": "john@example.com",
+    "bio": "Another bio"
+  }
+]
+  
+WHEN: INITIAL PAGE LOAD
+
+WHERE: USE EFFECT ON FORM 
+
+HOW: 
+Step 1: MAKE A FUNCTION CALLED getNewestUser() THAT WILL GET THE FORM DATA FROM THE API BY SENDING A GET REQUEST TO THE get-newest-user endpoint
+Step 2: SAVE THE FORM DATA IN A STATE VARIABLE USING useState()
+Step 3: CALL THE getNewestUser() FUNCTION ON PAGE LOAD IN THE useEffect()
+Step 4: CONDITIONALLY RENDER THE USER'S NAME IN THE RETURN STATEMENT (IN JSX) IF THE USER'S NAME EXISTS
+Add more steps as needed! 
+
+------------------------
+📊 SAVED COUNTRIES DATA 
+------------------------
+
+------------------------
+🔶 STORING SAVED COUNTRIES DATA 
+------------------------
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): POST
+  API ENDPOINT: /save-one-country
+
+  REQUEST BODY DATA TYPE (if applicable): OBJECT
+  REQUEST BODY (if applicable): {
+  "country_name": "Brazil"
+}
+  
+  RESPONSE DATA TYPE: STRING
+  RESPONSE: Success! The country is saved.
+
+WHEN: WHEN USER CLICKS SAVE BUTTON ON COUNTRY DETAIL PAGE
+
+WHERE: SAVE ON CLICK FUNCTION 
+
+HOW: 
+Step 1: IN getSavedCountries FUNCTION, MAKE A POST REQUEST TO THE API USING THE ENDPOINT /save-one-country
+Step 2: WHEN THE USER CLICKS THE SAVE BUTTON, THE COUNTRY WILL BE SAVED TO THE API IF NOT ALREADY
+Add more steps as needed! 
+
+------------------------
+🔶 RETRIEVING SAVED COUNTRIES DATA 
+------------------------
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): GET
+  API ENDPOINT: /get-all-saved-countries
+
+  REQUEST BODY DATA TYPE (if applicable): N/A
+  REQUEST BODY (if applicable): N/A
+  
+  RESPONSE DATA TYPE: ARRAY OF OBJECTS
+  RESPONSE: [
+  {
+    "country_name": "Japan"
+  },
+  {
+    "country_name": "Germany"
+  }
+]
+
+WHEN: WHEN PAGE LOADS
+
+WHERE: IN SAVED COUNTRIES FUNCTION
+
+HOW: 
+Step 1: DECLARE A getSavedCountries FUNCTION THAT WILL CALL THE API AND GET LIST OF SAVED COUNTRIES
+Step 2: USE THE ENDPOINT /get-all-saved-countries WITH A GET REQUEST
+Step 3: MAP THROUGH THE LIST OF SAVED COUNTRY TO GET NAME OF EACH COUNTRY
+Step 4: FIND EACH COUNTRY IN THE countriesData LIST AND CHECK IF IT MATCHES THE DATA
+Step 5: CREATE A USE STATE VARIABLE FOR SAVED COUNTRIES
+Step 6: SAVE THE LIST OF ALL SAVED COUNTRIES IN THE USE STATE VARIABLE
+Step 7: CREATE A USEEFFECT SO THAT THE getSavedCountries FUNCTION WILL RUN ON PAGE LOAD
+Step 8: IN THE RETURN, MAP THROUGH savedCountries AND RENDER A COUNTRY CARD FOR EACH SAVED COUNTRY
+Add more steps as needed! 
+
+------------------------
+📊 COUNTRY COUNTS DATA 
+------------------------
+
+------------------------
+🔶 STORING & RETRIEVING COUNTRY COUNTS DATA 
+------------------------
+NOTE: We combine storing & retrieving country counts data into one section because they always happen together. Each time we look up a country’s view count, we also need to increase it and save the new total.
+
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): POST
+  API ENDPOINT: /update-one-country-count
+
+  REQUEST BODY DATA TYPE (if applicable): OBJECT
+  REQUEST BODY (if applicable): {
+  "country_name": "France"
+}_
+  
+  RESPONSE DATA TYPE: OBJECT
+  RESPONSE: {
+  "count": 3
+}
+  
+WHEN: WHEN PAGE LOADS
+
+WHERE: COUNTRY DETAILS PAGE
+
+HOW: 
+Step 1: DECLARE AN updateOneCountryCount FUNCTION
+Step 2: WHEN THE PAGE LOADS, SEND A POST REQUEST TO THE API ENDPOINT /update-one-country-count
+Step 3: PASS IN OBJECT WITH COUNTRY NAME THAT WE WANT TO UPDATE
+Step 4: CALL FUNCTION IN USEEFFECT 
+Step 5: SAVE COUNT IN A STATE VARIABLE setPageCount
+Step 6: RENDER UPDATED COUNT TO THE PAGE USING STATE VARIABLE
+Add more steps as needed! 
+
+------------------------
+🔶 STRETCH GOAL: UNSAVE BUTTON
+------------------------
+WHAT...
+  TYPE OF HTTP REQUEST (GET OR POST): POST
+  API ENDPOINT: /unsave-one-country
+
+  REQUEST BODY DATA TYPE (if applicable): OBJECT
+  REQUEST BODY (if applicable): {
+  "country_name": "Brazil"
+}_
+  
+  RESPONSE DATA TYPE: STRING
+  RESPONSE: Success! The country is unsaved.
+  
+WHEN: WHEN USER CLICKS UNSAVE BUTTON
+
+WHERE: COUNTRY DETAILS PAGE
+
+HOW: 
+Step 1: DECLARE unsaveOnClick FUNCTION
+Step 2: SEND POST REQUEST TO API USING ENDPOINT /unsave-one-country
+Step 3: SET isSaved TO FALSE WHEN BUTTON IS CLICKED
