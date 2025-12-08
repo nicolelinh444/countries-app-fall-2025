@@ -37,20 +37,22 @@ This is what you can do on the app:
 
 **Frontend**
 
-- **Languages:** \***\*HTML\CSS\Javascript\*\***
+- **Languages:** \***\*HTML, CSS, Javascript\*\***
 - **Framework:** \***\*React\*\***
 - **Deployment:** \***\*Netlify\*\***
+- **Other:** \***\*Vite\*\***
 
 **Server/API**
 
-- **Languages:** \***\*\_\_\_\*\***
-- **Framework:** \***\*\_\_\_\*\***
-- **Deployment:** \***\*\_\_\_\*\***
+- **Languages:** \***\*Node.js\*\***
+- **Framework:** \***\*Express\*\***
+- **Deployment:** \***\*Render\*\***
+- **Other:** \***\*Postman\*\***
 
 **Database**
 
-- **Languages:** \***\*\_\_\_\*\***
-- **Deployment:** \***\*\_\_\_\*\***
+- **Languages:** \***\*PostgreSQL\*\***
+- **Deployment:** \***\*Neon\*\***
 
 ## 🔹 API Documentation
 
