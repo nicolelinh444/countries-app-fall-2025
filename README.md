@@ -10,6 +10,9 @@ Check out the app: https://your-project.netlify.app
 
 ## 🖼️ Screenshots
 
+<img width="1376" height="781" alt="Screenshot of countries app" src="https://github.com/user-attachments/assets/0bbb32b4-cd90-4726-9bf7-736b39680520" />
+
+
 Here is where you'll include a screenshot of your project to show it off!
 
 Your instructor will walk you through this process with the rest of the class. Please be patient until the time comes! In the meantime, you can fill out all other sections of this template.
