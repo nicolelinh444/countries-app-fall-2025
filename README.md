@@ -4,6 +4,8 @@
 
 This project is a full-stack app that shows world countries. Users can create a profile and save their favorite countries.
 
+This project is the culmination of what I learned over the past year, going from someone who barely dabbled in tech to someone who has created multiple full-stack applications!
+
 ## 🚀 Live Site
 
 Check out the app:
