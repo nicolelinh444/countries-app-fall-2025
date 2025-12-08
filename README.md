@@ -1,19 +1,21 @@
-# 📝 Your Project's Title — Replace this with your app's name!
+# 📝 Nicole's Countries App
 
 ## 📌 Project Description & Purpose
 
-This project is \***\*\_\_\_\*\***
+This project is a full-stack app that shows world countries. Users can create a profile and save their favorite countries.
 
 ## 🚀 Live Site
 
-Check out the app: https://countries-app-v5.netlify.app/
+Check out the app:
+Frontend: https://countries-app-v5.netlify.app/
+
+Full Stack: https://countries-app-fall-2025.onrender.com
 
 ## 🖼️ Screenshots
 
 <img width="1376" height="781" alt="Screenshot of countries app" src="https://github.com/user-attachments/assets/0bbb32b4-cd90-4726-9bf7-736b39680520" />
 
-
-Here is where you'll include a screenshot of your project to show it off!
+<!-- Here is where you'll include a screenshot of your project to show it off!
 
 Your instructor will walk you through this process with the rest of the class. Please be patient until the time comes! In the meantime, you can fill out all other sections of this template.
 
@@ -21,7 +23,7 @@ Your instructor will walk you through this process with the rest of the class. P
 2. Find your Github README.md file on the Github website
 3. Edit the site by clicking on the Pencil icon ✏️
 4. Move your cursor to the position where you want to paste the screenshot, then paste it. Github will convert the pasted screenshot into an `<img>` tag
-5. Select "Commit changes..." to save your changes
+5. Select "Commit changes..." to save your changes -->
 
 ## ✨ Features
 
@@ -89,19 +91,22 @@ CREATE TABLE saved_countries (
 
 ## 💭 Reflections
 
-**What I learned:** \***\*\_\_\_\*\***
+**What I learned:** I learned how to build a full stack app with multiple versions.
 
-**What I'm proud of:** \***\*\_\_\_\*\***
+**What I'm proud of:** I'm proud of working on this app over time, showing up every day and getting it done.
 
-**What challenged me:** \***\*\_\_\_\*\***
+**What challenged me:** One of my challenges was figuring out how to refactor the save country button into a heart.
 
 **Future ideas for how I'd continue building this project:**
 
-1. ***
-2. ***
-3. ***
+1. Filter by region
+2. Dark mode
+3. Add sparkles
 
 ## 🙌 Credits & Shoutouts
 
-Thanks to **\_\_\_\_** for \***\*\_\_\*\***!
-And thanks to **\_\_\_\_** for \***\*\_\_\*\***!
+Thanks to **Arianna** from AnnieCannons for \***being an awesome instructor.\***!
+
+Our **teaching assistants** in class.
+
+And thanks to **my fellow classmates** for completing this journey with me!\!
