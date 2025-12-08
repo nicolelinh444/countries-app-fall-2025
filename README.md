@@ -11,7 +11,7 @@ This project is the culmination of what I learned over the past year, going from
 Check out the app:
 Frontend: https://countries-app-v5.netlify.app/
 
-Full Stack: https://countries-app-fall-2025.onrender.com
+Backend: https://countries-app-fall-2025.onrender.com
 
 ## 🖼️ Screenshots
 
